@@ -1,0 +1,21 @@
+#msg{
+    color: #c7254e;
+    font-size: 12px;
+}
+
+a, a:hover{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 验证码样式 */
+#checkcode {
+    border: #8d8687 2px solid;
+    /* */
+    cursor: pointer;
+}
+
+img{
+    width: 100px;
+    height: auto;
+}

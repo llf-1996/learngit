@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="row">
+    <nav aria-label="Page navigation" class="col-md-offset-3 col-md-9">
+        <ul class="pagination">
+            <li><a href="/blog/index/?pageNow=1">首页</a></li>
+            {% if pageNow > 1 %}
+            <li>
+                <a href="/blog/index/?pageNow={{ pageNow|add:'-1' }}">上一页</a>
+            </li>
+            {% endif %}
+
+            {% for page in page_range %}
+            {% if page == pageNow %}
+            <li class="active">
+                <a>{{ page }}</a>
+            </li>
+            {% elif page >= pageNow|add:'-2' and page <= pageNow|add:'2' %}
+            <li>
+                <a href="/blog/index/?pageNow={{page}}">{{ page }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+
+            {% if pageNow < pageCount %}
+            <li>
+                <a href="/blog/index/?pageNow={{ pageNow|add:'1' }}">下一页</a>
+            </li>
+            {% endif %}
+            <li>
+                <a href="/blog/index/?pageNow={{pageCount}}">尾页</a>
+            </li>
+
+        </ul>
+    </nav>
+</div>
+
+
+</body>
+</html>

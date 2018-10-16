@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title%}
+登录
+{% endblock %}
+
+{% block content %}
+<div class="panel-heading">用户登录</div>
+<div class="panel-body">
+    <div id="msg">{{msg}}</div>
+    <hr>
+
+    <form action="/blog/login/" class="form-horizontal" method="POST">
+        {% csrf_token %}
+        <div class="form-group row">
+            <label for="name" class="col-md-2 control-label">用户名：</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="name" name="name" placeholder="请输入用户名">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="password" class="col-md-2 control-label">密码：</label>
+            <div class="col-md-6">
+                <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
+            </div>
+        </div>
+
+        {# ----- 验证码 ----- #}
+        {{ request.COOKIES.count }}
+        {% if request.COOKIES.count == "on" %}
+            <div class="form-group row">
+            <label for="password" class="col-md-2 control-label">验证码：</label>
+            <div class="col-md-3">
+                <input type='text' class="form-control" name="code" placeholder="请输入验证码" autocomplete="off">
+            </div>
+            <div class="col-md-2">
+                <img id="checkcode" src="{% url 'blog:code'%}" alt="验证码" title="点击刷新">
+            </div>
+        </div>
+        {% endif %}
+
+
+        <!--<div class="form-group row">-->
+            <!--<div class="col-md-1"></div>-->
+            <!--<div class="col-md-3">-->
+                <!--<input type='text' class="form-control" name="code" placeholder="请输入验证码">-->
+            <!--</div>-->
+            <!--<img id="checkcode" class="col-md-2" src="{% url 'blog:code'%}" alt="验证码" title="点击刷新">-->
+        <!--</div>-->
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                    <label>
+                        <input name="status" value="1" type="checkbox">记住密码
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2 col-md-offset-4">
+            <button type="submit" class="btn btn-default btn-danger">登录</button>
+        </div>
+
+    </form>
+    <br /><br />
+</div>
+{% endblock %}
+
+{% block myscript %}
+<script>
+    $(function() {
+        $("#checkcode").on("click", function() {
+            {% comment %}
+                多行注释
+                $(this).attr("src", "/blog/code/?id="+Math.random());
+            {% endcomment %}
+
+            $(this).attr("src", "/blog/code/?time="+new Date().getTime());  {# 获取时间戳 #}
+
+        });
+    });
+</script>
+
+{% endblock %}
+

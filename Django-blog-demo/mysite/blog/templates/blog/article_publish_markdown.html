@@ -1,0 +1,94 @@
+{% extends 'base.html'%}
+
+{% block title%}
+发表文章
+{% endblock %}
+
+{% block my_style %}
+<!-- 引入markdown编辑器 依赖文件 -->
+<link rel="stylesheet" href="/static/blog/js/lib/editor.md-master/css/editormd.min.css">
+<script src="/static/blog/js/lib/editor.md-master/editormd.min.js"></script>
+<script src="/static/tiny_mce/tiny_mce.js"></script>
+{% endblock %}
+
+{% block my_body %}
+
+{% comment %}
+    提示信息
+{% endcomment %}
+<div id="msg">{{msg}}</div>
+<hr>
+
+<div class="container">
+    <!--<form class="" action="/blog/add_article/" method="post">-->
+        {% csrf_token %}
+        <div class="row">
+            <div class="form-group col-md-8">
+                <div class="row">
+                    <div class="col-md-10">
+                        <input type="text" id="title" name="title" class="form-control" required placeholder="请输入标题">
+                    </div>
+                </div>
+
+            </div>
+            <button type="submit" class="btn btn-danger" onclick="add_article()">发表文章</button>
+
+        </div>
+
+        <hr>
+        <div class="row">
+            <div class="col-md-12" id="test-editormd">
+                <textarea name="content"></textarea>
+            </div>
+        </div>
+
+    <!--</form>-->
+    <br>
+    <br>
+
+</div>
+{% endblock %}
+
+
+{% block myscript %}
+<script>
+    <!-- tinymce富文本 -->
+    tinyMCE.init({
+        "mode": 'textareas',
+        'theme': 'advanced',
+        'width': 850,
+        'height': 500,
+    });
+    
+    function add_article() {
+        title = $("#title").val();
+        content = tinyMCE.activeEditor.getContent();
+        // console.info(title, content);
+
+        $.ajax({
+            url: "/blog/add_article/",
+            method: "POST",
+            data: {"title": title, "content":content, "csrfmiddlewaretoken": "{{csrf_token}}"},
+            dataType: "json",
+            success: function (data) {
+                if(data.success) {
+                    $('#msg').html(data.msg);
+
+                    // 清空数据
+                    // $("#title").val('');
+                    // tinyMCE.activeEditor.setContent('');
+
+                    // 前端页面跳转
+                    window.location.pathname = "/blog/show_articles/"
+
+                }else{
+                    $("#msg").text("文章添加失败")
+                }
+            }
+        })
+        
+    }
+</script>
+
+{% endblock %}
+

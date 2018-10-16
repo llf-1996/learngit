@@ -1,0 +1,36 @@
+{% extends 'base.html'%}
+
+{% block title%}
+{{article.title | truncatechars:10}}
+{% endblock %}
+
+{% block content %}
+<!--{% load static %}-->
+<div class="panel-heading">文章详情</div>
+<div class="panel-body">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading col-md-10 col-md-offset-1">
+                <h4>{{article.title | truncatechars:50}}</h4>
+                <div class="text-left">
+                    作者：{{article.author.nickname}} |
+                    发表时间：{{article.publishTime}} |
+                    修改时间：{{article.modifyTime}}
+                    {% if request.session.loginuser.id == article.author.id %}
+                        <div class="text-right">
+                            <a href="{% url 'blog:update_article' article.id %}">编辑</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="panel-body col-md-10 col-md-offset-1">
+                <!--{{ article.content | safe }}-->
+                 {% autoescape off %}
+                    {{article.content}}
+                {% endautoescape %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html'%}
+
+
+{% block my_style %}
+<!-- 引入markdown编辑器 依赖文件 -->
+<link rel="stylesheet" href="/static/blog/js/lib/editor.md-master/css/editormd.min.css">
+<script src="/static/blog/js/lib/editor.md-master/editormd.min.js"></script>
+<script src="/static/tiny_mce/tiny_mce.js"></script>
+
+{% endblock %}
+
+{% block my_body %}
+<div class="container">
+    <form class="" action="/blog/{{article.id}}/update_article/" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="form-group col-md-8">
+                <div class="row">
+                    <div class="col-md-10">
+                        <input type="text" id="title" name="title" class="form-control" required value="{{article.title}}" placeholder="文章标题">
+                    </div>
+                </div>
+
+            </div>
+            <button type="submit" class="btn btn-danger">提交</button>
+
+        </div>
+
+        <hr>
+        <div class="row">
+            <div class="col-md-12" id="test-editormd">
+                <!-- 文章编辑器：富文本框-->
+                <textarea name="content" placeholder="文章内容">{{article.content}}</textarea>
+
+            </div>
+        </div>
+
+
+    </form>
+    <br>
+    <br>
+
+</div>
+{% endblock %}
+
+
+{% block myscript %}
+
+<script>
+    tinyMCE.init({
+        "mode": 'textareas',
+        'theme': 'advanced',
+        'width': 850,
+        'height': 500,
+    })
+</script>
+
+
+{% endblock %}
+
+
+

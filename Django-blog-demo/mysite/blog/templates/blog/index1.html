@@ -1,0 +1,80 @@
+{% extends 'base.html'%}
+
+
+{% block content %}
+{% load static %}
+<div class="panel-heading">首页</div>
+<div class="panel-body">
+
+    <div class="row">
+        {% for at in articles %}
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="{% static 'img/cover.png' %}" alt="封面">
+                <div class="caption">
+                    <h5>
+                        <a href="{% url 'blog:show_article' at.id %}">{{ at.title|truncatechars:15 }}</a>
+                    </h5>
+                    <p>
+                        {{at.remark|truncatechars:40 }}
+                    </p>
+                    <p>
+                        <a href="#">{{at.author.nickname}}</a>
+                        <span> | {{at.publishTime}}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <h2>对不起，目前没有文章！！！<a href="{% url 'blog:add_article' %}">请发表文章</a></h2>
+    {% endfor %}
+    </div>
+
+    <!-- 分页 -->
+    <div class="row">
+        <nav aria-label="Page navigation" class="col-md-offset-3 col-md-6">
+            <ul class="pagination">
+                <li><a href="/blog/index/?pageNow=1">首页</a></li>
+                {% if pageNow > 1 %}
+                <li>
+                    <a href="/blog/index/?pageNow={{ pageNow|add:'-1' }}">上一页</a>
+                </li>
+                {% endif %}
+
+                {% for page in page_range %}
+                    {% if page == pageNow %}
+                    <li class="active">
+                        <a>{{ page }}</a>
+                    </li>
+                    {% elif page >= pageNow|add:'-2' and page <= pageNow|add:'2' %}
+                    <li>
+                        <a href="/blog/index/?pageNow={{page}}" >{{ page }}</a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if pageNow < pageCount %}
+                <li>
+                    <a href="/blog/index/?pageNow={{ pageNow|add:'1' }}">下一页</a>
+                </li>
+                {% endif %}
+
+                <li>
+                    <a href="/blog/index/?pageNow={{pageCount}}">尾页</a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+
+    <!-- 总条数 总页数-->
+    <nav aria-label="...">
+        <ul class="pager">
+            <li><a>总文章数:{{allCount}}</a></li>
+            <li><a>总页数:{{pageCount}}</a></li>
+        </ul>
+    </nav>
+
+</div>
+{% endblock %}
+
