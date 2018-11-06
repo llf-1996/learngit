@@ -1,0 +1,11 @@
+ <ul>
+                                    <li class="newlist_deatil_first clearfix zwmc">
+                                        <input name="vacancyid" data-monitor="CC120212031J90250176000|1" value="CC120212031J90250176000_530_1_03_409__1_" onclick=" zlapply.uncheckAll('allvacancyid') " type="checkbox">
+                                        <div style="width:300px;float:left">
+                                            <a style="font-weight: bold" par="ssidkey=y&amp;ss=409&amp;ff=03&amp;sg=02848a98efef492481a0e0fa12195706&amp;so=1" href="http://jobs.zhaopin.com/120212031250176.htm" target="_blank" onclick="submitLog(6);">C++软件研发工程师&nbsp;</a><a href="http://e.zhaopin.com/products/1/detail.do" target="_blank" title="点击“顶”字，了解更多"><img src="/assets/images/top.png" border="0" align="absmiddle">&nbsp;<img src="/assets/images/jp.gif" border="0" align="absmiddle"></a>
+                                        </div>
+                                    </li>
+                                    <li class="newlist_deatil_three gsmc"><a href="http://company.zhaopin.com/P4/CC1202/1203/CC120212031.htm" target="_blank">瑞萨集成电路设计（北京）有限公司 </a> <a href="http://company.zhaopin.com/P4/CC1202/1203/CC120212031.htm" target="_blank" style="vertical-align: top;"><img src="//img03.zhaopin.cn/IHRNB/img/souvip1002.png" alt="1002" class="icon_vip" border="0" align="absmiddle"></a></li>
+                                    <li class="newlist_deatil_two"><span>地点：北京</span><span>公司性质：外商独资</span><span>公司规模：100-499人</span><span>学历：本科</span><span>职位月薪：10000-20000元/月</span></li><li class="newlist_deatil_last">  岗位要求：  1、专业要求：计算机、软件工程相关专业；  2、学历要求：大学本科及以上；  3、年龄、性别要求：不限；  4、外语要求：英语四级及以上。  具体薪资面议  &nbsp;  任职要求：  &nbsp;&nbsp; 1. 熟练掌握面向对象程序设计方法和C++语言,具有Windows平台相关开发工作经验； &nbsp;&nbsp; 2...</li>
+
+                                </ul>
